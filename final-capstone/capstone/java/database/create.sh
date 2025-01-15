@@ -1,15 +1,15 @@
 #!/bin/bash
-set -ex  # Enable debugging (-x) and stop on error (-e)
-export PGPASSWORD='postgres1'
+set -e  # Exit on any error
+set -x  # Print commands as they are executed
+
+export PGPASSWORD='Damien1331'
 BASEDIR=$(dirname $0)
 DATABASE=final_capstone
 
-echo "Starting database setup..."
-
-echo "Dropping the database (if it exists)..."
+echo "Dropping database and roles if they exist..."
 psql -U postgres -f "$BASEDIR/dropdb.sql"
 
-echo "Creating the database..."
+echo "Creating database $DATABASE..."
 createdb -U postgres $DATABASE
 
 echo "Running schema.sql..."
@@ -20,5 +20,3 @@ psql -U postgres -d $DATABASE -f "$BASEDIR/data.sql"
 
 echo "Running user.sql..."
 psql -U postgres -d $DATABASE -f "$BASEDIR/user.sql"
-
-echo "Database setup complete!"

@@ -9,5 +9,11 @@ WHERE datname = 'final_capstone';
 
 DROP DATABASE final_capstone;
 
-DROP USER final_capstone_owner;
-DROP USER final_capstone_appuser;
+REASSIGN OWNED BY final_capstone_owner TO postgres;
+REASSIGN OWNED BY final_capstone_appuser TO postgres;
+
+DROP OWNED BY final_capstone_owner;
+DROP OWNED BY final_capstone_appuser;
+
+DROP ROLE IF EXISTS final_capstone_owner;
+DROP ROLE IF EXISTS final_capstone_appuser;
